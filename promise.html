@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>promise</title>
+    
+</head>
+<body>
+<script type="text/javascript">
+    function wash(resolve){
+        console.log('开始洗衣服...');
+
+        setTimeout(()=>{
+            console.log('洗完了！');
+            resolve('一堆洗干净的衣服');
+        }, 2000);
+    }
+
+    function hang(clothes){
+        console.log('开始晾衣服...');
+        return new Promise(resolve=>{
+            setTimeout(()=>{
+                console.log(clothes+'晾完了！');
+                resolve("一堆晾好的衣服");
+            }, 3000)
+        });
+    }
+
+    function dry(clothes){
+        console.log('等衣服干...');
+        return new Promise(resolve=>{
+            setTimeout(()=>{
+                console.log(clothes+'晾干了!');
+                resolve('一堆晾干了的衣服');
+            }, 3000)
+        });
+    }
+
+    function pickup(clothes){
+        console.log('开始收衣服...');
+        setTimeout(()=>{
+            console.log(clothes+'收完了!');
+        }, 3000)
+    }
+    var promise = new Promise(wash);
+    promise.then(hang).then(dry).then(pickup);
+</script>
+</body>
+</html>
